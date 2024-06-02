@@ -2,35 +2,34 @@ package PawnShop.PawnShop.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.Map;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "antiques")
 @PrimaryKeyJoinColumn(name = "product_id")
 @NoArgsConstructor
+@Data
 public class Antiques extends PawnItem {
-    @NotBlank
     @Column(name = "age")
     private int age;
 
-    @NotBlank
     @Column(name = "originality")
     private String originality; // e.g. "original", "restored", "reproduction"
 
-    @NotBlank
     @Column(name = "condition")
     private String condition;
 
-    @NotBlank
+    @Column(name = "material")
     private String material; // e.g. "wood", "metal", "porcelain"
 
-    @NotBlank
     @Column(name = "maker")
     private String maker;
 
-    @NotBlank
     @Column(name = "provenance")
     private String provenance;
 

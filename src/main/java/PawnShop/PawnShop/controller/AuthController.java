@@ -1,3 +1,4 @@
+/*
 package PawnShop.PawnShop.controller;
 
 import PawnShop.PawnShop.exception.UserAlreadyExistsException;
@@ -19,9 +20,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthController {
@@ -30,7 +33,7 @@ public class AuthController {
     private final JwtUtils jwtUtils;
 
     @PostMapping("/register-user")
-    public ResponseEntity<?> registerUser(User user) {
+    public ResponseEntity<?> registerUser(@RequestBody User user) {
         try {
             userService.registerUser(user);
             return ResponseEntity.ok("Registration successfull");
@@ -58,3 +61,4 @@ public class AuthController {
                 roles));
     }
 }
+*/

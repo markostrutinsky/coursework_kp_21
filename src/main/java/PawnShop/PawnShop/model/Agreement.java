@@ -15,6 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class Agreement {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pawn_item_id")
     private Long id;
 
@@ -42,9 +43,9 @@ public class Agreement {
     @Column(name = "is_paid")
     private boolean isPaid;
 
-    @OneToOne
-    @JoinColumn(name = "pawn_item_id")
-    private PawnItem item;
+    //@OneToOne
+    //@JoinColumn(name = "pawn_item_id")
+    //private PawnItem item;
 
     public Agreement(String firstName, String lastName, String email, BigDecimal amount, int interestRate, Date startDate, Date dueDate, boolean isPaid) {
         this.firstName = firstName;

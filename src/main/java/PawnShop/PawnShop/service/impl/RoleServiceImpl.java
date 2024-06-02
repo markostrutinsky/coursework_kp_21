@@ -1,3 +1,4 @@
+/*
 package PawnShop.PawnShop.service.impl;
 
 import PawnShop.PawnShop.exception.RoleAlreadyExistException;
@@ -79,4 +80,4 @@ public class RoleServiceImpl implements RoleService {
         role.ifPresent(Role::removeAllUsersFromRole);
         return roleRepository.save(role.get());
     }
-}
+}*/

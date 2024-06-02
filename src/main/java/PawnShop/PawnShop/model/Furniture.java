@@ -5,45 +5,48 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.Map;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "furniture")
 @PrimaryKeyJoinColumn(name = "product_id")
 @NoArgsConstructor
+@Data
 public class Furniture extends PawnItem {
-
-    @NotBlank
+    //@NotBlank
     @Column(name = "material")
     private String material; // e.g. "wood", "metal", "fabric"
 
-    @NotBlank
+    //@NotBlank
     @Column(name = "style")
     private String style; // e.g. "modern", "traditional", "industrial"
 
-    @NotBlank
+    //@NotBlank
     @Column(name = "width")
     private double width;
 
-    @NotBlank
+    //@NotBlank
     @Column(name = "height")
     private double height;
 
-    @NotBlank
+    //@NotBlank
     @Column(name = "depth")
     private double depth;
 
-    @NotBlank
+    //@NotBlank
     @Column(name = "age")
     private int age;
 
-    @NotBlank
+    //@NotBlank
     @Column(name = "brand")
     private String brand;
 
-    @NotBlank
+    //@NotBlank
     @Column(name = "condition")
     private String condition;
 

@@ -1,3 +1,4 @@
+/*
 package PawnShop.PawnShop.security.jwt;
 
 import PawnShop.PawnShop.security.user.PawnShopUserDetails;
@@ -16,9 +17,11 @@ import java.util.Date;
 import java.util.List;
 
 
+*/
 /**
  * @author Simpson Alfred
- */
+ *//*
+
 
 @Component
 public class JwtUtils {
@@ -70,3 +73,4 @@ public class JwtUtils {
 
 
 }
+*/

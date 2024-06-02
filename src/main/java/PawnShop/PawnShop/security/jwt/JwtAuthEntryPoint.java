@@ -1,3 +1,4 @@
+/*
 package PawnShop.PawnShop.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,9 +17,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+*/
 /**
  * @author Simpson Alfred
- */
+ *//*
+
 
 @Component
 public class JwtAuthEntryPoint  implements AuthenticationEntryPoint {
@@ -40,3 +43,4 @@ public class JwtAuthEntryPoint  implements AuthenticationEntryPoint {
         mapper.writeValue(response.getOutputStream(), body);
     }
 }
+*/

@@ -2,33 +2,32 @@ package PawnShop.PawnShop.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.Map;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "jewelry")
 @PrimaryKeyJoinColumn(name = "product_id")
 @NoArgsConstructor
+@Data
 public class Jewelry extends PawnItem {
 
-    @NotBlank
     @Column(name = "metal_sample", nullable = false)
     private int metalSample;
 
-    @NotBlank
     @Column(name = "weight", nullable = false)
     private double weight;
 
-    @NotBlank
     @Column(name = "size", nullable = false)
     private double size;
 
-    @NotBlank
     @Column(name = "is_precious_stones", nullable = false)
     private boolean isPreciousStones;
 
-    @NotBlank
     @Column(name = "stones_count", nullable = false)
     private int stonesCount;
 

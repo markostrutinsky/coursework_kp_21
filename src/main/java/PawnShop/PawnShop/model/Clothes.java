@@ -5,33 +5,37 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.Map;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "clothes")
 @PrimaryKeyJoinColumn(name = "product_id")
 @NoArgsConstructor
+@Data
 public class Clothes extends PawnItem{
 
-    @NotBlank
+    //@NotBlank
     @Column(name = "size")
     private double size;
 
-    @NotBlank
+    //@NotBlank
     @Column(name = "brand")
     private String brand;
 
-    @NotBlank
+    //@NotBlank
     @Column(name = "clothingType")
     private String clothingType; // e.g. "shirt", "pants", "dress"
 
-    @NotBlank
+    //@NotBlank
     @Column(name = "material")
     private String material; // e.g. "cotton", "polyester", "silk"
 
-    @NotBlank
+    //@NotBlank
     @Column(name = "condition")
     private String condition;
 

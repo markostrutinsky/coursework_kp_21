@@ -1,4 +1,4 @@
-package PawnShop.PawnShop.security;
+/*package PawnShop.PawnShop.security;
 
 import PawnShop.PawnShop.security.jwt.AuthTokenFilter;
 import PawnShop.PawnShop.security.jwt.JwtAuthEntryPoint;
@@ -19,10 +19,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
-/**
- * @author Simpson Alfred
- */
 @Configuration
 @RequiredArgsConstructor
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
@@ -55,8 +51,8 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer :: disable)
-                .exceptionHandling(
-                        exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint))
+                *//*.exceptionHandling(
+                        exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint))*//*
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers( "/api/auth/**", "/api/pawnshop/**")
@@ -65,4 +61,4 @@ public class WebSecurityConfig {
         http.addFilterBefore(authenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-}
+}*/

@@ -1,3 +1,4 @@
+/*
 package PawnShop.PawnShop.service.impl;
 
 import PawnShop.PawnShop.exception.UserAlreadyExistsException;
@@ -28,6 +29,9 @@ public class UserServiceImpl implements UserService {
         if(userRepository.existsByEmail(user.getEmail())) {
             throw new UserAlreadyExistsException(user.getEmail() + " already exists");
         }
+        if(user.getPassword() == null) {
+            throw new NullPointerException("Password cannot be null");
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         Role userRole = roleRepository.findByName("ROLE_USER").get();
         user.setRoles(Collections.singletonList(userRole));
@@ -54,3 +58,4 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 }
+*/

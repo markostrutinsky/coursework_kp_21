@@ -1,3 +1,4 @@
+/*
 package PawnShop.PawnShop.security.user;
 
 
@@ -9,9 +10,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+*/
 /**
  * @author Simpson Alfred
- */
+ *//*
+
 @Service
 @RequiredArgsConstructor
 public class PawnShopUserDetailsService implements UserDetailsService {
@@ -24,3 +27,4 @@ public class PawnShopUserDetailsService implements UserDetailsService {
         return PawnShopUserDetails.buildUserDetails(user);
     }
 }
+*/

@@ -2,10 +2,13 @@ package PawnShop.PawnShop.controller;
 
 import PawnShop.PawnShop.model.PawnItem;
 import PawnShop.PawnShop.model.PawnItemCategory;
+import PawnShop.PawnShop.response.AgreementResponse;
 import PawnShop.PawnShop.response.PawnItemResponse;
 import PawnShop.PawnShop.service.PawnItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,15 +18,16 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/pawnshop")
+@RequestMapping(value = "/api/pawnshop", produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 public class PawnItemController {
-    PawnItemService pawnItemService;
+    private final PawnItemService pawnItemService;
+    private final ConversionService conversionService;
 
-    @Autowired
-    public PawnItemController(PawnItemService pawnItemService) {
-        this.pawnItemService = pawnItemService;
-    }
+//    @Autowired
+//    public PawnItemController(PawnItemService pawnItemService) {
+//        this.pawnItemService = pawnItemService;
+//    }
 
     @GetMapping("/items/by-category/{category}")
     public ResponseEntity<List<? extends PawnItem>> getAllByCategory(@PathVariable("category") PawnItemCategory category) {
@@ -35,11 +39,14 @@ public class PawnItemController {
         return ResponseEntity.ok(pawnItemService.findAllItems());
     }
 
-    @PostMapping("/add-item")
-    public ResponseEntity<PawnItemResponse> addItem(@RequestBody Map<String, String> formData) throws SQLException, IOException {
+    @PostMapping(value = "/add-item", produces = MediaType.APPLICATION_JSON_VALUE)
+    public PawnItemResponse addItem(@RequestBody Map<String, String> formData) throws SQLException, IOException {
         PawnItem pawnItem = pawnItemService.addNewItem(formData);
 
-        PawnItemResponse pawnItemResponse = new PawnItemResponse(pawnItem);
-        return ResponseEntity.ok(pawnItemResponse);
+        PawnItemResponse pawnItemResponse = conversionService.convert(pawnItem, PawnItemResponse.class);
+        AgreementResponse agreementResponse =
+                conversionService.convert(pawnItem.getAgreement(), AgreementResponse.class);
+        pawnItemResponse.setAgreement(agreementResponse);
+        return pawnItemResponse;
     }
 }

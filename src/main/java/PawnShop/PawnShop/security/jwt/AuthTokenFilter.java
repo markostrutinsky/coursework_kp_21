@@ -1,3 +1,4 @@
+/*
 package PawnShop.PawnShop.security.jwt;
 import PawnShop.PawnShop.security.user.PawnShopUserDetailsService;
 import jakarta.servlet.FilterChain;
@@ -17,9 +18,11 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+*/
 /**
  * @author Simpson Alfred
- */
+ *//*
+
 
 public class AuthTokenFilter extends OncePerRequestFilter {
 
@@ -56,4 +59,4 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         }
         return null;
     }
-}
+}*/

@@ -5,37 +5,41 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.Map;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "electronics")
 @PrimaryKeyJoinColumn(name = "product_id")
 @NoArgsConstructor
+@Data
 public class Electronics extends PawnItem {
 
-    @NotBlank
+    //@NotBlank
     @Column(name = "year")
     private int year;
 
-    @NotBlank
+    //@NotBlank
     @Column(name = "brand")
     private String brand;
 
-    @NotBlank
+    //@NotBlank
     @Column(name = "model")
     private String model;
 
-    @NotBlank
+    //@NotBlank
     @Column(name = "productType")
     private String productType; // e.g. "TV", "smartphone", "laptop"
 
-    @NotBlank
+    //@NotBlank
     @Column(name = "screenSize")
     private double screenSize;
 
-    @NotBlank
+    //@NotBlank
     @Column(name = "storageCapacity")
     private double storageCapacity;
 

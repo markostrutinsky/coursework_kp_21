@@ -1,3 +1,4 @@
+/*
 package PawnShop.PawnShop.security.user;
 
 import PawnShop.PawnShop.model.User;
@@ -13,9 +14,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+*/
 /**
  * @author Simpson Alfred
- */
+ *//*
+
 
 @Getter
 @Setter
@@ -76,3 +79,4 @@ public class PawnShopUserDetails implements UserDetails {
         return true;
     }
 }
+*/

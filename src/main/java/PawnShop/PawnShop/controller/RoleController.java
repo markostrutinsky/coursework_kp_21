@@ -1,3 +1,4 @@
+/*
 package PawnShop.PawnShop.controller;
 
 import PawnShop.PawnShop.exception.RoleAlreadyExistException;
@@ -54,3 +55,4 @@ public class RoleController {
         return roleService.assignRoleToUser(userId, roleId);
     }
 }
+*/

@@ -10,11 +10,12 @@ import java.util.Date;
 import java.util.Map;
 
 public class Director {
-    public Agreement createAgreement(Builder builder, Map<String, String> formData) {
+    public Agreement createAgreement(Builder builder, Map<String, String> formData,
+                                     BigDecimal evaluatedValue) {
         return builder.personWithName(formData.get("firstName"))
                 .personWithName(formData.get("lastName"))
                 .withEmail(formData.get("email"))
-                .takesLoanForAmount(new BigDecimal(formData.get("loanAmount")))
+                .takesLoanForAmount(evaluatedValue)
                 .atAnInterestRate(Integer.parseInt(formData.get("interestRate")))
                 .startsWith(new Date())
                 .expires(Date.from(Instant.now().plus(Duration.ofDays(30))))

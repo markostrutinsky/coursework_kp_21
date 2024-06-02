@@ -1,4 +1,4 @@
-package PawnShop.PawnShop.evaluation;
+package PawnShop.PawnShop.service.strategy;
 
 import PawnShop.PawnShop.model.PawnItem;
 

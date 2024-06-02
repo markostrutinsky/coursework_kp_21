@@ -9,28 +9,27 @@ import java.util.Map;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "item_type", discriminatorType = DiscriminatorType.STRING)
 @Table(name = "items")
 @Data
 @NoArgsConstructor
 public class PawnItem {
     @Id
-    @GeneratedValue
+    @GeneratedValue()
     @Column(name = "product_id")
     private Long id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name"/*, nullable = false*/)
     private String pawnItemName;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "type", nullable = false)
+    @Column(name = "type"/*, nullable = false*/)
     private PawnItemCategory category;
 
     @Lob
-    @Column(name = "photo", nullable = false)
+    @Column(name = "photo"/*, nullable = false*/)
     private Blob photo;
 
-    @OneToOne(/*cascade = CascadeType.ALL*/)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "agreement_id")
     private Agreement agreement;
 

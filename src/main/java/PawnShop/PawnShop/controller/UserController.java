@@ -1,3 +1,4 @@
+/*
 package PawnShop.PawnShop.controller;
 
 import PawnShop.PawnShop.model.User;
@@ -45,3 +46,4 @@ public class UserController {
         }
     }
 }
+*/
