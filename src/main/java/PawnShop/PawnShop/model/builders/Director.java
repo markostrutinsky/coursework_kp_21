@@ -13,7 +13,7 @@ public class Director {
     public Agreement createAgreement(Builder builder, Map<String, String> formData,
                                      BigDecimal evaluatedValue) {
         return builder.personWithName(formData.get("firstName"))
-                .personWithName(formData.get("lastName"))
+                .bySurname(formData.get("lastName"))
                 .withEmail(formData.get("email"))
                 .takesLoanForAmount(evaluatedValue)
                 .atAnInterestRate(Integer.parseInt(formData.get("interestRate")))

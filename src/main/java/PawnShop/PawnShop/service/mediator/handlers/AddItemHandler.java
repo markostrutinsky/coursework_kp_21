@@ -1,4 +1,4 @@
-package PawnShop.PawnShop.service.impl;
+package PawnShop.PawnShop.service.mediator.handlers;
 
 import PawnShop.PawnShop.model.Agreement;
 import PawnShop.PawnShop.model.PawnItem;
@@ -8,53 +8,56 @@ import PawnShop.PawnShop.model.builders.Director;
 import PawnShop.PawnShop.model.builders.base.Builder;
 import PawnShop.PawnShop.model.factroies.base.ItemFactoryImpl;
 import PawnShop.PawnShop.repository.PawnItemRepository;
-import PawnShop.PawnShop.service.ExpectedItemFields;
-import PawnShop.PawnShop.service.PawnItemService;
+import PawnShop.PawnShop.service.mediator.Handler;
+import PawnShop.PawnShop.service.mediator.requests.AddItemRequest;
 import PawnShop.PawnShop.service.observer.NotificationService;
 import PawnShop.PawnShop.service.strategy.EvaluationStrategy;
 import PawnShop.PawnShop.service.strategy.impl.*;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import javax.sql.rowset.serial.SerialBlob;
 import java.math.BigDecimal;
 import java.sql.Blob;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
-import static PawnShop.PawnShop.service.ExpectedItemFields.PHOTO;
 import static PawnShop.PawnShop.service.ExpectedItemFields.CATEGORY;
+import static PawnShop.PawnShop.service.ExpectedItemFields.PHOTO;
 
+@Component
+public class AddItemHandler implements Handler<AddItemRequest, PawnItem> {
 
-@Service
-@RequiredArgsConstructor
-public class PawnItemServiceImpl implements PawnItemService {
     private final static Map<PawnItemCategory, EvaluationStrategy> EVALUATION_STRATEGY_MAP = getEvaluationStrategyMap();
-    private  PawnItemRepository itemRepository;
+    private final PawnItemRepository itemRepository;
     private final ItemFactoryImpl factory;
-
     private final NotificationService notificationService;
 
     @Autowired
-    public PawnItemServiceImpl(PawnItemRepository itemRepository, ItemFactoryImpl factory, NotificationService notificationService) {
+    public AddItemHandler(PawnItemRepository itemRepository, ItemFactoryImpl factory, NotificationService notificationService) {
         this.itemRepository = itemRepository;
         this.factory = factory;
         this.notificationService = notificationService;
     }
 
     @Override
-    public PawnItem createItem(Map<String, String> formData) {
-        return factory.createPawnItem(formData);
-    }
-
-    @Override
-    public PawnItem addNewItem(Map<String, String> formData) throws SQLException {
+    public PawnItem handle(AddItemRequest addItemRequest) {
+        var formData = addItemRequest.getFormData();
         PawnItem item = createItem(formData);
         item.setCategory(PawnItemCategory.convertStringToPawnItemCategory(formData.get(CATEGORY.getDeclaredName())));
         if (Objects.nonNull(formData.get(PHOTO.getDeclaredName())) && !formData.get(PHOTO.getDeclaredName()).isBlank()){
             byte[] photoBytes = Base64.getDecoder().decode(formData.get(PHOTO.getDeclaredName()));
-            Blob photoBlob = new SerialBlob(photoBytes);
+            Blob photoBlob = null;
+            try {
+                photoBlob = new SerialBlob(photoBytes);
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
             item.setPhoto(photoBlob);
         }
         Agreement agreement = createAgreement(formData, item);
@@ -65,14 +68,8 @@ public class PawnItemServiceImpl implements PawnItemService {
         return result;
     }
 
-    @Override
-    public List<? extends PawnItem> getAllItemsByCategory(PawnItemCategory category) {
-        return itemRepository.findByCategory(category);
-    }
-
-    @Override
-    public List<? extends PawnItem> findAllItems() {
-        return itemRepository.findAll();
+    public PawnItem createItem(Map<String, String> formData) {
+        return factory.createPawnItem(formData);
     }
 
     private Agreement createAgreement(Map<String, String> formData, PawnItem pawnItem) {

@@ -4,9 +4,11 @@ package PawnShop.PawnShop.service.strategy.impl;
 import PawnShop.PawnShop.model.PawnItem;
 import PawnShop.PawnShop.model.SportEquipment;
 import PawnShop.PawnShop.service.strategy.EvaluationStrategy;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
+@Component
 public class SportsEquipmentEvaluationStrategy implements EvaluationStrategy {
     @Override
     public BigDecimal evaluate(PawnItem pawnItem) {
