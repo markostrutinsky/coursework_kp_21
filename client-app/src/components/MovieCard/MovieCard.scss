@@ -1,0 +1,38 @@
+$card-bg-color: #334139;
+$box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+$transition: transform 0.2s ease-in-out;
+$secondary-text-color: #a0a0a0;
+
+.card {
+    background: $card-bg-color;
+    color: #B0C592;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: $box-shadow;
+    transition: $transition;
+    cursor: pointer;
+    &:hover {
+        transform: scale(1.03) rotate(2deg);
+        .button{
+            transform: rotate(-2deg);
+        }
+    }
+    .button {
+        transition: $transition;
+    }
+}
+
+.title {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: space-between;
+    .button{
+        max-width: 300px;
+        margin: 0;
+        height: 100%;
+    }
+}
+
+.genre {
+    color: $secondary-text-color;
+}

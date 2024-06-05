@@ -18,15 +18,15 @@ public class PawnItem {
     @Column(name = "product_id")
     private Long id;
 
-    @Column(name = "name"/*, nullable = false*/)
+    @Column(name = "name")
     private String pawnItemName;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "type"/*, nullable = false*/)
+    @Column(name = "type")
     private PawnItemCategory category;
 
     @Lob
-    @Column(name = "photo"/*, nullable = false*/)
+    @Column(name = "photo")
     private Blob photo;
 
     @OneToOne(cascade = CascadeType.ALL)
