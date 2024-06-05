@@ -1,17 +1,17 @@
-/*package PawnShop.PawnShop.security.jwt;
+package PawnShop.PawnShop.security.jwt;
 
+import PawnShop.PawnShop.model.security.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.nio.charset.StandardCharsets;
 import java.security.Key;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
-import java.util.Map;
 import java.util.function.Function;
 
 @Component
@@ -21,6 +21,7 @@ public class JwtService {
 //    private final JwtDeserializer jwtDeserializer;
 
     public static final String SECRET = "357638792F423F4428472B4B6250655368566D597133743677397A2443264629";
+    public static final String SCOPE_CLAIM = "scope";
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -30,9 +31,20 @@ public class JwtService {
         return extractClaim(token, Claims::getExpiration);
     }
 
+    public String extractScope(String token) {
+        return extractClaim(token, SCOPE_CLAIM);
+    }
+
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
+    }
+
+    public String extractClaim(String token, String claimName) {
+        final Claims claims = extractAllClaims(token);
+        String scope = claims.get(claimName, String.class);
+        System.out.println("Scope is " + scope);
+        return scope;
     }
 
     private Claims extractAllClaims(String token) {
@@ -40,10 +52,7 @@ public class JwtService {
                 ? token.replaceAll("Bearer ", "")
                 : token;
         System.out.println(token);
-//        token = jwtDeserializer.deserialize(token.getBytes(StandardCharsets.UTF_8)).toString();
-//        System.out.println(token);
-        return Jwts.parserBuilder()
-//                .deserializeJsonWith(jwtDeserializer)
+        return Jwts.parser()
                 .setSigningKey(getSignKey())
                 .build()
                 .parseClaimsJws(token)
@@ -56,11 +65,27 @@ public class JwtService {
 
     public Boolean validateToken(String token) {
         final String username = extractUsername(token);
+        System.out.println("Username is " + username);
         return (!isTokenExpired(token));
+    }
+
+    public String generateToken(User user) {
+        String token = Jwts.builder()
+                .signWith(getSignKey())
+                .claims()
+                .expiration(Date.from((Instant.now().plus(2, ChronoUnit.HOURS))))
+                .subject(user.getUsername())
+                .add(SCOPE_CLAIM, user.getAuthority().getGranted())
+                .and()
+                .compact();
+
+        System.out.println("Token is: " + token);
+
+        return token;
     }
 
     private Key getSignKey() {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET);
         return Keys.hmacShaKeyFor(keyBytes);
     }
-}*/
+}

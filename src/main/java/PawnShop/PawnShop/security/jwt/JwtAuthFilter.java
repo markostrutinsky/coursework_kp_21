@@ -1,10 +1,12 @@
-/*package PawnShop.PawnShop.security.jwt;
+package PawnShop.PawnShop.security.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,27 +20,33 @@ import java.util.Collection;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
 
-    @Autowired
-    private JwtService jwtService;
+    private final JwtService jwtService;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
 
         String authHeader = request.getHeader("Authorization");
         String token = null;
         String username = null;
+        String scope;
         if(authHeader != null && authHeader.startsWith("Bearer ")){
+            System.out.println("Filter, printing token:\n" + authHeader);
             token = authHeader.substring(7);
             username = jwtService.extractUsername(token);
+            scope = jwtService.extractScope(token);
+        } else {
+            scope = null;
         }
 
         if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
             UserDetails userDetails = new UserDetails() {
                 @Override
                 public Collection<? extends GrantedAuthority> getAuthorities() {
-                    return List.of((GrantedAuthority) () -> "Read");
+                    return List.of((GrantedAuthority) () -> scope);
                 }
 
                 @Override
@@ -82,4 +90,4 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(request, response);
     }
-}*/
+}

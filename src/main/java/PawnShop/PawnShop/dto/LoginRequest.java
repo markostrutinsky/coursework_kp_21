@@ -1,4 +1,4 @@
-package PawnShop.PawnShop.request;
+package PawnShop.PawnShop.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

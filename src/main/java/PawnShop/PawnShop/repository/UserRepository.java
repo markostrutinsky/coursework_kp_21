@@ -1,6 +1,6 @@
 package PawnShop.PawnShop.repository;
 
-import PawnShop.PawnShop.model.User;
+import PawnShop.PawnShop.model.security.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +10,9 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
     void deleteUserByEmail(String email);
 
-    Optional<User> findByEmail(String email);
+    Optional<User> findByEmailAndPassword(String email, String password);
 
     boolean existsByEmail(String email);
+
+    boolean existsByUsername(String username);
 }
