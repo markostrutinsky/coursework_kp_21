@@ -33,10 +33,10 @@ public class Jewelry extends PawnItem {
 
     public Jewelry(Map<String, String> fromData) {
         super(fromData);
-        this.metalSample = Integer.parseInt(fromData.get("metal_sample"));
+        this.metalSample = Integer.parseInt(fromData.get("metalSample"));
         this.weight = Double.parseDouble(fromData.get("weight"));
         this.size = Double.parseDouble(fromData.get("size"));
-        this.isPreciousStones = Boolean.parseBoolean(fromData.get("is_precious_stones"));
-        this.stonesCount = Integer.parseInt(fromData.get("stones_count"));
+        this.isPreciousStones = Boolean.parseBoolean(fromData.get("isPreciousStones"));
+        this.stonesCount = Integer.parseInt(fromData.get("stonesCount"));
     }
 }

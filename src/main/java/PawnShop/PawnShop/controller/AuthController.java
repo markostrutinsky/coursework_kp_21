@@ -21,6 +21,7 @@ public class AuthController {
     private final UserService userService;
     private final JwtService jwtService;
 
+    @CrossOrigin
     @PostMapping("/register-user")
     @ResponseStatus(HttpStatus.CREATED)
     public RegisterResponseDto registerUser(@RequestBody RegisterRequestDto registerRequestDto) {
@@ -40,7 +41,7 @@ public class AuthController {
                 .build();
     }
 
-
+    @CrossOrigin
     @PostMapping("/login")
     public LoginResponse authenticateUser(@Valid @RequestBody LoginRequest request) {
         User user = userService.authenticateUser(request.getEmail(), request.getPassword());

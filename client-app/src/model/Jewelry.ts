@@ -1,4 +1,4 @@
-import {PawnItem} from "./PawnItem";
+import {PawnItem, PawnItemCategory} from "./PawnItem";
 
 export interface Jewelry extends PawnItem {
     metalSample: number;
@@ -7,3 +7,4 @@ export interface Jewelry extends PawnItem {
     isPreciousStones: boolean;
     stonesCount: number;
 }
+

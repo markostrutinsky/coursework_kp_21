@@ -1,7 +1,21 @@
-﻿import CustomFetchService from "./customFetchService";
-import {CreateUserAccountDTO} from "../models/userDTOs/CreateUserAccountDTO";
-import {AuthUserDTO} from "../models/userDTOs/AuthUserDTO";
-import {LoginUserDTO} from "../models/userDTOs/LoginUserDTO";
+﻿import CustomFetchService from './customFetchService';
+
+export interface AuthUserDTO {
+    username: string;
+    email: string;
+    jwtToken: string;
+}
+
+export interface CreateUserAccountDTO {
+    username: string;
+    password: string;
+    email: string;
+}
+
+export interface LoginUserDTO {
+    email: string;
+    password: string;
+}
 
 class AuthService {
     private readonly baseURI: string = "api/auth";
@@ -12,12 +26,14 @@ class AuthService {
     }
 
     public async register(createdUserDTO: CreateUserAccountDTO): Promise<AuthUserDTO> {
-        return (await this.customFetchService.post<AuthUserDTO>(`${this.baseURI}/sign-up`, createdUserDTO));
+        const response = await this.customFetchService.post<AuthUserDTO>(`${this.baseURI}/register-user`, createdUserDTO, {"Authorization":""});
+        return response;
     }
 
     public async login(loginUserDTO: LoginUserDTO): Promise<AuthUserDTO> {
-        return (await this.customFetchService.post<AuthUserDTO>(`${this.baseURI}/sign-in`, loginUserDTO));
+        const response = await this.customFetchService.post<AuthUserDTO>(`${this.baseURI}/login`, loginUserDTO, {"Authorization":""});
+        return response;
     }
 }
 
-export default AuthService
+export default AuthService;

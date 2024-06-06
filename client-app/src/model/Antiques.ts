@@ -2,9 +2,9 @@ import {PawnItem} from "./PawnItem";
 
 export interface Antiques extends PawnItem {
     age: number;
-    originality: string; // e.g. "original", "restored", "reproduction"
+    originality: string;
     condition: string;
-    material: string; // e.g. "wood", "metal", "porcelain"
+    material: string;
     maker: string;
     provenance: string;
 }

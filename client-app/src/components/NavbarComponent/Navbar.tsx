@@ -18,9 +18,9 @@ const Navbar: FC<NavbarComponentProps> = (props) => {
             <div className={'navbar-title'}>{props.title}</div>
             <div className={"left-angle"} onClick={openDropdown}>≡</div>
             {dropdownOpen ? <div className={"dropdown"}>
-                <a href={"/movies"}>Movies</a>
+                <a href={"/items"}>Items</a>
                 <a href={"/profile"}>Profile</a>
-                <a href={"/create-movie"}>Create movie (admin only)</a>
+                <a href={"/add-item"}>Add an item</a>
                 <a href={"/"}>Logout</a> 
             </div> : null}
         </nav>

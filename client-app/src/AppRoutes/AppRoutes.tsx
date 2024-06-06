@@ -3,14 +3,11 @@ import './AppRoutes.scss';
 import {Route, Routes} from "react-router-dom";
 import AuthRequired from "../components/AuthRequired/AuthRequired";
 import AuthPage from "../components/AuthPage/AuthPage";
-import AuthAdminRequired from "../components/AuthAdminRequiredComponent/AuthAdminRequiredComponent";
-import TicketCreatePage from "../components/TickedCreatePage/TicketCreatePage";
-import TicketUpgradePage from "../components/TicketUpgradePage/TicketUpgradePage";
-import MoviePage from "../components/MoviePageComponent/MoviePage";
-import MoviesPage from "../components/MoviesPageComponent/MoviesPage";
-import AuthContext, {AuthProvider} from "../contexts/authContext";
-import MovieCreate from "../components/MovieCreate/MovieCreate";
-import ProfilePage from "../components/ProfilePageComponent/ProfilePage";
+import ItemPage from '../components/MoviePageComponent/ItemPage';
+import ItemsPage from '../components/MoviesPageComponent/ItemsPage';
+import ProfilePage from '../components/ProfilePageComponent/ProfilePage';
+import { AuthProvider } from '../contexts/authContext';
+import ItemCreate from "../components/MovieCreate/MovieCreate";
 
 interface AppRoutesProps {}
 
@@ -19,14 +16,9 @@ const AppRoutes: FC<AppRoutesProps> = () => {
     return (
         <AuthProvider>
         <Routes>
-            <Route element={<AuthAdminRequired/>}>
-                <Route path={"/create-movie"} element={<MovieCreate/>}></Route>
-            </Route>
-            <Route path={"/movies"} element={<MoviesPage/>}></Route>
-            <Route path={"/movie/:movieId"} element={<MoviePage/>}></Route>
-            <Route element={<AuthRequired/>}>
-                <Route path={"/create-ticket/:movieId"} element={<TicketCreatePage/>}></Route>
-            </Route>
+            <Route path={"/add-item"} element={<ItemCreate/>}></Route>
+            <Route path={"/items"} element={<ItemsPage/>}></Route>
+            <Route path={"/item/:itemId"} element={<ItemPage/>}></Route>
             <Route element={<AuthRequired/>}>
                 <Route path={"/profile"} element={<ProfilePage/>}></Route>
             </Route>

@@ -1,9 +1,9 @@
 import {PawnItem} from "./PawnItem";
 
 export interface SportEquipment extends PawnItem {
-    sportType: string; // e.g. "soccer", "basketball", "tennis"
+    sportType: string;
     brand: string;
-    equipmentType: string; // e.g. "ball", "shoes", "racket"
+    equipmentType: string;
     size: number;
     condition: string;
     model: string;

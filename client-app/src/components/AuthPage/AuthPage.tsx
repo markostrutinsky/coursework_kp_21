@@ -30,10 +30,8 @@ const AuthPage: FC<AuthPageProps> = (props) => {
     const handleRegister = async (event : any) => {
         event.preventDefault();
         try {
-            const user = await authService.register({fullName: fullname, email: email, password: password});
+            const user = await authService.register({username: fullname, email: email, password: password});
             console.log('Registered user:', user);
-            localStorage.setItem('authUser', JSON.stringify(user));
-            setAuthUser(user);
             navigate(from);
         } catch (err) {
             setError('Registration failed. Please try again.');

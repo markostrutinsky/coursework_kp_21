@@ -24,7 +24,6 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.addFilterAfter(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         http
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers(HttpMethod.POST, "/api/auth/**")
@@ -35,7 +34,7 @@ public class WebSecurityConfig {
                         .hasAuthority(Authority.READ_WRITE.getGranted())
                         .anyRequest()
                         .denyAll());
-
+        http.addFilterAfter(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         http.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.csrf(AbstractHttpConfigurer::disable);
         return http.build();

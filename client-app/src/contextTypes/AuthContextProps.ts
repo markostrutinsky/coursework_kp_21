@@ -1,5 +1,5 @@
 ﻿import {Dispatch, SetStateAction} from "react";
-import {AuthUserDTO} from "../models/userDTOs/AuthUserDTO";
+import { AuthUserDTO } from "../services/authService";
 
 export interface AuthContextProps {
     authUser: AuthUserDTO | null

@@ -1,5 +1,5 @@
 ﻿import {createContext, ReactNode, useEffect, useState} from "react";
-import {AuthUserDTO} from "../models/userDTOs/AuthUserDTO";
+import { AuthUserDTO } from "../services/authService";
 import {AuthContextProps} from "../contextTypes/AuthContextProps";
 
 const AuthContext = createContext<AuthContextProps>({

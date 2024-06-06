@@ -4,9 +4,12 @@ export const DEFAULT_HEADERS: { [key: string]: string } = {
     "Accept": "application/json",
     "Content-type": "application/json",
     "Access-Control-Allow-Origin": "*",
-    "Authorization": "Bearer " + JSON.parse(localStorage.getItem("authUser") || "{}").token,
+    "Authorization": (()=>{
+        const token = JSON.parse(localStorage.getItem("authUser") ?? "{}").jwtToken
+        return token ? `Bearer ${token}` : ""
+    })(),
 }
-export const DOMAIN = "https://localhost:7261";
+export const DOMAIN = "http://localhost:8080";
 
 class CustomFetchService {
     constructor() {
