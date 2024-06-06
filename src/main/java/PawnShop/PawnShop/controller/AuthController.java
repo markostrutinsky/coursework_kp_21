@@ -1,6 +1,6 @@
 package PawnShop.PawnShop.controller;
 
-import PawnShop.PawnShop.dto.LoginResponse;
+import PawnShop.PawnShop.dto.AuthResponse;
 import PawnShop.PawnShop.dto.RegisterRequestDto;
 import PawnShop.PawnShop.dto.RegisterResponseDto;
 import PawnShop.PawnShop.model.security.Authority;
@@ -11,7 +11,6 @@ import PawnShop.PawnShop.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/api/auth")
@@ -24,7 +23,7 @@ public class AuthController {
     @CrossOrigin
     @PostMapping("/register-user")
     @ResponseStatus(HttpStatus.CREATED)
-    public RegisterResponseDto registerUser(@RequestBody RegisterRequestDto registerRequestDto) {
+    public AuthResponse registerUser(@RequestBody RegisterRequestDto registerRequestDto) {
         System.out.println("registration");
         User user = User.builder()
                 .email(registerRequestDto.getEmail())
@@ -33,21 +32,23 @@ public class AuthController {
                 .authority(Authority.READ_WRITE)
                 .build();
         User result = userService.registerUser(user);
-        return RegisterResponseDto.builder()
+        String jwtToken = jwtService.generateToken(user);
+        return AuthResponse.builder()
                 .id(result.getId())
                 .username(result.getUsername())
-                .password(result.getPassword())
                 .email(result.getEmail())
+                .jwtToken(jwtToken)
                 .build();
     }
 
     @CrossOrigin
     @PostMapping("/login")
-    public LoginResponse authenticateUser(@Valid @RequestBody LoginRequest request) {
+    public AuthResponse authenticateUser(@Valid @RequestBody LoginRequest request) {
         User user = userService.authenticateUser(request.getEmail(), request.getPassword());
         String jwtToken = jwtService.generateToken(user);
 
-        return LoginResponse.builder()
+        return AuthResponse.builder()
+                .id(user.getId())
                 .username(user.getUsername())
                 .email(user.getEmail())
                 .jwtToken(jwtToken)

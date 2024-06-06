@@ -6,7 +6,8 @@ import lombok.Data;
 
 @Data
 @Builder
-public class LoginResponse {
+public class AuthResponse {
+    private Long id;
     private String username;
     private String email;
     private String jwtToken;
