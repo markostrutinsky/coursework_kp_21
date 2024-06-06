@@ -16,7 +16,7 @@ const AuthPage: FC<AuthPageProps> = (props) => {
     const authService = new AuthService();
     const {setAuthUser} = useAuth();
     const location = useLocation();
-    const {from} = location.state as {from: string} || {from: '/movies'};
+    const {from} = location.state as {from: string} || {from: isRegistering ? '/auth-page': '/items'};
     const navigate = useNavigate();
 
     const handleToggle = () => {

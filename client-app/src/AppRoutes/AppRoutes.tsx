@@ -19,9 +19,7 @@ const AppRoutes: FC<AppRoutesProps> = () => {
             <Route path={"/add-item"} element={<ItemCreate/>}></Route>
             <Route path={"/items"} element={<ItemsPage/>}></Route>
             <Route path={"/item/:itemId"} element={<ItemPage/>}></Route>
-            <Route element={<AuthRequired/>}>
                 <Route path={"/profile"} element={<ProfilePage/>}></Route>
-            </Route>
             <Route path={"/"} element={<AuthPage/>}></Route>
             <Route path={"/auth-page"} element={<AuthPage/>}></Route>
         </Routes>

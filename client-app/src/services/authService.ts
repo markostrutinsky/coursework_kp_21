@@ -1,6 +1,7 @@
 ﻿import CustomFetchService from './customFetchService';
 
 export interface AuthUserDTO {
+    id: number;
     username: string;
     email: string;
     jwtToken: string;

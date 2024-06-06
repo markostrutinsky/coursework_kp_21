@@ -50,11 +50,13 @@ public class PawnItemController {
         return pawnItemResponse;
     }
 
+    @CrossOrigin
     @GetMapping("/all-items/{userId}")
     public ResponseEntity<List<? extends PawnItem>> getAllByUserId(@PathVariable("userId") long userId) {
         return ResponseEntity.ok(mediator.send(new GetAllItemsByUserRequest(userId)));
     }
 
+    @CrossOrigin
     @DeleteMapping("/{itemId}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<PawnItemDeleteResponse> delete(@PathVariable("itemId") long itemId) {

@@ -24,6 +24,16 @@ class PawnshopService {
         const response = await this.customFetchService.post<PawnItemResponse>(`${this.baseURI}/add-item`, formData);
         return response;
     }
+
+    public async getAllByUserId(userId: number){
+        const response = await this.customFetchService.get<PawnItem[]>(`${this.baseURI}/all-items/${userId}`);
+        return response;
+    }
+
+    public async delete(itemId: number){
+        const response = await this.customFetchService.delete(`${this.baseURI}/${itemId}`);
+        return response;
+    }
 }
 
 export default PawnshopService;
