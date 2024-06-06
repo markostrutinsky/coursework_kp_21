@@ -5,13 +5,18 @@ import PawnShop.PawnShop.exception.UserAlreadyExistsException;
 import PawnShop.PawnShop.model.security.User;
 import PawnShop.PawnShop.repository.UserRepository;
 import PawnShop.PawnShop.service.UserService;
+import PawnShop.PawnShop.validation.Registrar;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+@Primary
+@Qualifier("userserviceImpl")
+public class UserServiceImpl implements UserService, Registrar {
 
     private final UserRepository userRepository;
 

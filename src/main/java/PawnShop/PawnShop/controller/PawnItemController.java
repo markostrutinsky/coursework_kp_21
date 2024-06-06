@@ -61,4 +61,6 @@ public class PawnItemController {
         PawnItem deletedItem = mediator.send(new DeleteItemRequest(itemId));
         return ResponseEntity.ok(PawnItemDeleteResponse.builder().id(deletedItem.getId()).build());
     }
+
+
 }

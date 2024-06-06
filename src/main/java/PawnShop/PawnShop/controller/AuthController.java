@@ -8,8 +8,11 @@ import PawnShop.PawnShop.model.security.User;
 import PawnShop.PawnShop.dto.LoginRequest;
 import PawnShop.PawnShop.security.jwt.JwtService;
 import PawnShop.PawnShop.service.UserService;
+import PawnShop.PawnShop.validation.Registrar;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +20,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 public class AuthController {
+
     private final UserService userService;
     private final JwtService jwtService;
+    private final Registrar registrar;
+
 
     @CrossOrigin
     @PostMapping("/register-user")
@@ -31,7 +37,7 @@ public class AuthController {
                 .password(registerRequestDto.getPassword())
                 .authority(Authority.READ_WRITE)
                 .build();
-        User result = userService.registerUser(user);
+        User result = registrar.registerUser(user);
         String jwtToken = jwtService.generateToken(user);
         return AuthResponse.builder()
                 .id(result.getId())
