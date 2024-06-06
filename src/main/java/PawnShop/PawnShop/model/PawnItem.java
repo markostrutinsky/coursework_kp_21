@@ -34,7 +34,7 @@ public class PawnItem {
     private Agreement agreement;
 
     public PawnItem(Map<String, String> fromData) {
-        this.pawnItemName = fromData.get("name");
+        this.pawnItemName = fromData.get("pawnItemName");
         this.category = PawnItemCategory.valueOf(fromData.get("category"));
     }
 }
