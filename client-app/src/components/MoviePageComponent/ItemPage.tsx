@@ -14,7 +14,6 @@ interface MoviePageComponentProps {
 const ItemPage: React.FC = () => {
     const { itemId } = useParams<{ itemId: string }>();
     const [pawnItem, setPawnItem] = useState<PawnItem | null>(null);
-    const navigate = useNavigate();
     const pawnItemService = new PawnItemService();
     
     
@@ -41,8 +40,17 @@ const ItemPage: React.FC = () => {
         <div className={"page"}>
             <Navbar title={"Item: " + pawnItem.pawnItemName}/>
             <div className={"movieCard"}>
-                <div style={{width: "100%", display:"flex", justifyContent:"center"}}><img className={"movieImage"} src="/" alt={pawnItem.pawnItemName} /></div>
-                <p className={"genre"}>{pawnItem.category}</p>
+                <div>Properties: </div>
+                {Object.entries(pawnItem).map(entry =>{
+                    if(entry[0] == "agreement" || entry[0] == "user")
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return <div>{entry[0]} : {entry[1]}</div>
+                    }
+                })}
             </div>
         </div>
     </div>;

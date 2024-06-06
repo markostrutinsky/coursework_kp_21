@@ -40,7 +40,7 @@ public class AgreementBuilder implements Builder {
 
     public AgreementBuilder atAnInterestRate(int interestRate) {
         this.interestRate = interestRate;
-        this.amount = amount.add(amount.divide(new BigDecimal(interestRate)));
+        this.amount = amount.add(amount.divide(new BigDecimal(interestRate), 2));
         return this;
     }
 
