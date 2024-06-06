@@ -1,10 +1,14 @@
 package PawnShop.PawnShop.model.security;
 
+import PawnShop.PawnShop.model.Agreement;
+import PawnShop.PawnShop.model.PawnItem;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -23,4 +27,7 @@ public class User {
 
     @Enumerated
     private Authority authority;
+
+    @OneToMany
+    private List<PawnItem> pawnItems;
 }

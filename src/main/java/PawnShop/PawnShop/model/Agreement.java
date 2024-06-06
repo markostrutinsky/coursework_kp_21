@@ -2,7 +2,6 @@ package PawnShop.PawnShop.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -42,10 +41,6 @@ public class Agreement {
 
     @Column(name = "is_paid")
     private boolean isPaid;
-
-    //@OneToOne
-    //@JoinColumn(name = "pawn_item_id")
-    //private PawnItem item;
 
     public Agreement(String firstName, String lastName, String email, BigDecimal amount, int interestRate, Date startDate, Date dueDate, boolean isPaid) {
         this.firstName = firstName;

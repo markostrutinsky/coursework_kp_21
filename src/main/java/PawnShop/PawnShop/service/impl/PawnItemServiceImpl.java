@@ -7,6 +7,7 @@ import PawnShop.PawnShop.model.builders.AgreementBuilder;
 import PawnShop.PawnShop.model.builders.Director;
 import PawnShop.PawnShop.model.builders.base.Builder;
 import PawnShop.PawnShop.model.factroies.base.ItemFactoryImpl;
+import PawnShop.PawnShop.model.security.User;
 import PawnShop.PawnShop.repository.PawnItemRepository;
 import PawnShop.PawnShop.service.ExpectedItemFields;
 import PawnShop.PawnShop.service.PawnItemService;
@@ -73,6 +74,11 @@ public class PawnItemServiceImpl implements PawnItemService {
     @Override
     public List<? extends PawnItem> findAllItems() {
         return itemRepository.findAll();
+    }
+
+    @Override
+    public List<? extends PawnItem> findAllItemsByUser(User user) {
+        return itemRepository.findAllByUser(user);
     }
 
     private Agreement createAgreement(Map<String, String> formData, PawnItem pawnItem) {

@@ -3,13 +3,14 @@ package PawnShop.PawnShop.controller;
 import PawnShop.PawnShop.model.PawnItem;
 import PawnShop.PawnShop.model.PawnItemCategory;
 import PawnShop.PawnShop.response.AgreementResponse;
+import PawnShop.PawnShop.response.PawnItemDeleteResponse;
 import PawnShop.PawnShop.response.PawnItemResponse;
+import PawnShop.PawnShop.service.PawnItemService;
 import PawnShop.PawnShop.service.mediator.Mediator;
-import PawnShop.PawnShop.service.mediator.requests.AddItemRequest;
-import PawnShop.PawnShop.service.mediator.requests.GetAllItemsByCategoryRequest;
-import PawnShop.PawnShop.service.mediator.requests.GetAllItemsRequest;
+import PawnShop.PawnShop.service.mediator.requests.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,7 @@ public class PawnItemController {
     }
 
     @PostMapping(value = "/add-item", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
     public PawnItemResponse addItem(@RequestBody Map<String, String> formData) {
         PawnItem pawnItem = mediator.send(new AddItemRequest(formData));
 
@@ -43,5 +45,17 @@ public class PawnItemController {
                 conversionService.convert(pawnItem.getAgreement(), AgreementResponse.class);
         pawnItemResponse.setAgreement(agreementResponse);
         return pawnItemResponse;
+    }
+
+    @GetMapping("/all-items/{userId}")
+    public ResponseEntity<List<? extends PawnItem>> getAllByUserId(@PathVariable("userId") long userId) {
+        return ResponseEntity.ok(mediator.send(new GetAllItemsByUserRequest(userId)));
+    }
+
+    @DeleteMapping("/{itemId}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<PawnItemDeleteResponse> delete(@PathVariable("itemId") long itemId) {
+        PawnItem deletedItem = mediator.send(new DeleteItemRequest(itemId));
+        return ResponseEntity.ok(PawnItemDeleteResponse.builder().id(deletedItem.getId()).build());
     }
 }

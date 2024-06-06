@@ -1,5 +1,6 @@
 package PawnShop.PawnShop.model;
 
+import PawnShop.PawnShop.model.security.User;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,9 @@ public class PawnItem {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "agreement_id")
     private Agreement agreement;
+
+    @ManyToOne
+    private User user;
 
     public PawnItem(Map<String, String> fromData) {
         this.pawnItemName = fromData.get("name");

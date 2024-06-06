@@ -8,11 +8,14 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    void deleteUserByEmail(String email);
-
     Optional<User> findByEmailAndPassword(String email, String password);
 
     boolean existsByEmail(String email);
 
     boolean existsByUsername(String username);
+
+    Optional<User> findByUsername(String username);
+
+
+
 }

@@ -2,6 +2,7 @@ package PawnShop.PawnShop.service;
 
 import PawnShop.PawnShop.model.PawnItem;
 import PawnShop.PawnShop.model.PawnItemCategory;
+import PawnShop.PawnShop.model.security.User;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -14,4 +15,6 @@ public interface PawnItemService {
     PawnItem addNewItem(Map<String, String> fromData) throws IOException, SQLException;
     List<? extends PawnItem> getAllItemsByCategory(PawnItemCategory category);
     List<? extends PawnItem> findAllItems();
+    List<? extends PawnItem> findAllItemsByUser(User user);
+
 }

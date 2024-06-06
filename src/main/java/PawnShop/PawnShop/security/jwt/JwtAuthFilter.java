@@ -32,53 +32,16 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         String authHeader = request.getHeader("Authorization");
         String token = null;
         String username = null;
-        String scope;
+        String scope = null;
         if(authHeader != null && authHeader.startsWith("Bearer ")){
             System.out.println("Filter, printing token:\n" + authHeader);
             token = authHeader.substring(7);
             username = jwtService.extractUsername(token);
             scope = jwtService.extractScope(token);
-        } else {
-            scope = null;
         }
 
         if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
-            UserDetails userDetails = new UserDetails() {
-                @Override
-                public Collection<? extends GrantedAuthority> getAuthorities() {
-                    return List.of((GrantedAuthority) () -> scope);
-                }
-
-                @Override
-                public String getPassword() {
-                    return "Test";
-                }
-
-                @Override
-                public String getUsername() {
-                    return "Test";
-                }
-
-                @Override
-                public boolean isAccountNonExpired() {
-                    return true;
-                }
-
-                @Override
-                public boolean isAccountNonLocked() {
-                    return true;
-                }
-
-                @Override
-                public boolean isCredentialsNonExpired() {
-                    return true;
-                }
-
-                @Override
-                public boolean isEnabled() {
-                    return true;
-                }
-            };
+            UserDetails userDetails = getUserDetails(username, scope);
             if(jwtService.validateToken(token)){
                 UsernamePasswordAuthenticationToken authenticationToken =
                         new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
@@ -89,5 +52,44 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request, response);
+    }
+
+    private static UserDetails getUserDetails(String username, String scope) {
+        return new UserDetails() {
+            @Override
+            public Collection<? extends GrantedAuthority> getAuthorities() {
+                return List.of((GrantedAuthority) () -> scope);
+            }
+
+            @Override
+            public String getPassword() {
+                return "Test";
+            }
+
+            @Override
+            public String getUsername() {
+                return username;
+            }
+
+            @Override
+            public boolean isAccountNonExpired() {
+                return true;
+            }
+
+            @Override
+            public boolean isAccountNonLocked() {
+                return true;
+            }
+
+            @Override
+            public boolean isCredentialsNonExpired() {
+                return true;
+            }
+
+            @Override
+            public boolean isEnabled() {
+                return true;
+            }
+        };
     }
 }

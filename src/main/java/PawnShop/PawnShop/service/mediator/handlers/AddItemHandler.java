@@ -7,14 +7,19 @@ import PawnShop.PawnShop.model.builders.AgreementBuilder;
 import PawnShop.PawnShop.model.builders.Director;
 import PawnShop.PawnShop.model.builders.base.Builder;
 import PawnShop.PawnShop.model.factroies.base.ItemFactoryImpl;
+import PawnShop.PawnShop.model.security.User;
 import PawnShop.PawnShop.repository.PawnItemRepository;
+import PawnShop.PawnShop.service.UserService;
 import PawnShop.PawnShop.service.mediator.Handler;
 import PawnShop.PawnShop.service.mediator.requests.AddItemRequest;
 import PawnShop.PawnShop.service.observer.NotificationService;
 import PawnShop.PawnShop.service.strategy.EvaluationStrategy;
 import PawnShop.PawnShop.service.strategy.impl.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.sql.rowset.serial.SerialBlob;
@@ -30,22 +35,19 @@ import static PawnShop.PawnShop.service.ExpectedItemFields.CATEGORY;
 import static PawnShop.PawnShop.service.ExpectedItemFields.PHOTO;
 
 @Component
+@RequiredArgsConstructor
 public class AddItemHandler implements Handler<AddItemRequest, PawnItem> {
 
     private final static Map<PawnItemCategory, EvaluationStrategy> EVALUATION_STRATEGY_MAP = getEvaluationStrategyMap();
     private final PawnItemRepository itemRepository;
     private final ItemFactoryImpl factory;
     private final NotificationService notificationService;
-
-    @Autowired
-    public AddItemHandler(PawnItemRepository itemRepository, ItemFactoryImpl factory, NotificationService notificationService) {
-        this.itemRepository = itemRepository;
-        this.factory = factory;
-        this.notificationService = notificationService;
-    }
+    private final UserService userService;
 
     @Override
     public PawnItem handle(AddItemRequest addItemRequest) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userService.getByUsername(userDetails.getUsername());
         var formData = addItemRequest.getFormData();
         PawnItem item = createItem(formData);
         item.setCategory(PawnItemCategory.convertStringToPawnItemCategory(formData.get(CATEGORY.getDeclaredName())));
@@ -63,6 +65,7 @@ public class AddItemHandler implements Handler<AddItemRequest, PawnItem> {
         Agreement agreement = createAgreement(formData, item);
 
         item.setAgreement(agreement);
+        item.setUser(user);
         PawnItem result = itemRepository.save(item);
         notificationService.notify("New item", "User posted a new to catalog");
         return result;

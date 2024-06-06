@@ -1,7 +1,9 @@
 package PawnShop.PawnShop.controller;
 
 import PawnShop.PawnShop.exception.UserAlreadyExistsException;
+import PawnShop.PawnShop.exception.UserAndProvidedTokenDoesNotMatchException;
 import PawnShop.PawnShop.model.ErrorResponse;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
@@ -26,6 +28,27 @@ public class DefaultControllerAdvice {
         log.warn("Exception in controller", exception);
         return ErrorResponse.builder()
                 .status(NOT_FOUND.value())
+                .error(exception.getMessage())
+                .build();
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    @ResponseStatus(NOT_FOUND)
+    public ErrorResponse entityNotFoundException(HttpServletRequest request, EntityNotFoundException exception) {
+        log.warn("Exception in controller", exception);
+        return ErrorResponse.builder()
+                .status(NOT_FOUND.value())
+                .error(exception.getMessage())
+                .build();
+    }
+
+    @ExceptionHandler(UserAndProvidedTokenDoesNotMatchException.class)
+    @ResponseStatus(CONFLICT)
+    public ErrorResponse userAndProvidedTokenDoesNotMatchException(HttpServletRequest request,
+                                                                   UserAndProvidedTokenDoesNotMatchException exception) {
+        log.warn("Exception in controller", exception);
+        return ErrorResponse.builder()
+                .status(CONFLICT.value())
                 .error(exception.getMessage())
                 .build();
     }

@@ -33,6 +33,8 @@ public class WebSecurityConfig {
                         .hasAuthority(Authority.READ_WRITE.getGranted())
                         .requestMatchers(HttpMethod.POST, "/api/pawnshop/**")
                         .hasAuthority(Authority.READ_WRITE.getGranted())
+                        .requestMatchers(HttpMethod.DELETE, "/api/pawnshop/**")
+                        .hasAuthority(Authority.READ_WRITE.getGranted())
                         .anyRequest()
                         .denyAll());
 
