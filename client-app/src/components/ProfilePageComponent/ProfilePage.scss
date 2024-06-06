@@ -1,0 +1,72 @@
+$pp-page-bg-color: #1E2D24;
+$pp-card-bg-color: #334139;
+$pp-text-color: #B0C592;
+$pp-secondary-text-color: #a0a0a0;
+$pp-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+$pp-transition: transform 0.2s ease-in-out;
+
+.pp-page {
+    background: $pp-page-bg-color;
+    color: $pp-text-color;
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.pp-profile-card {
+    background: $pp-card-bg-color;
+    color: $pp-text-color;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: $pp-box-shadow;
+    text-align: center;
+    transition: $pp-transition;
+    max-width: 400px;
+    width: 100%;
+}
+
+.pp-profile-card:hover {
+    transform: scale(1.03) rotate(2deg);
+}
+
+.pp-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.pp-name {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.pp-email {
+    color: $pp-secondary-text-color;
+    margin-bottom: 20px;
+}
+
+.pp-bio {
+    font-size: 1em;
+}
+
+.pp-ticket {
+    background: $pp-card-bg-color;
+    color: $pp-text-color;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: $pp-box-shadow;
+    text-align: center;
+    transition: $pp-transition;
+    max-width: 400px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.delete-button {
+    color: whitesmoke;
+    background-color: #ff0000;
+}

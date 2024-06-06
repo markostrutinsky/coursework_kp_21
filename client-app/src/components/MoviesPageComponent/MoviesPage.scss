@@ -1,0 +1,37 @@
+$page-bg-color: #1E2D24;
+$navbar-bg-color: #334139;
+$text-color: #B0C592;
+$secondary-text-color: #a0a0a0;
+
+.page {
+    background: $page-bg-color;
+    color: $text-color;
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+}
+
+.navbar {
+    background: $navbar-bg-color;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.space-between {
+    justify-content: space-between !important;
+}
+
+.navbar-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    color: $text-color;
+}
+
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}

@@ -25,16 +25,19 @@ public class PawnItemController {
     private final ConversionService conversionService;
     private final Mediator mediator;
 
+    @CrossOrigin
     @GetMapping("/items/by-category/{category}")
     public ResponseEntity<List<? extends PawnItem>> getAllByCategory(@PathVariable("category") PawnItemCategory category) {
         return ResponseEntity.ok(mediator.send(new GetAllItemsByCategoryRequest(category)));
     }
 
+    @CrossOrigin
     @GetMapping("/all-items")
     public ResponseEntity<List<? extends PawnItem>> getAll() {
         return ResponseEntity.ok(mediator.send(new GetAllItemsRequest()));
     }
 
+    @CrossOrigin
     @PostMapping(value = "/add-item", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public PawnItemResponse addItem(@RequestBody Map<String, String> formData) {

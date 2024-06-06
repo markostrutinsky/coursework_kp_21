@@ -19,15 +19,15 @@ public class PawnItem {
     @Column(name = "product_id")
     private Long id;
 
-    @Column(name = "name"/*, nullable = false*/)
+    @Column(name = "name")
     private String pawnItemName;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "type"/*, nullable = false*/)
+    @Column(name = "type")
     private PawnItemCategory category;
 
     @Lob
-    @Column(name = "photo"/*, nullable = false*/)
+    @Column(name = "photo")
     private Blob photo;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -38,7 +38,7 @@ public class PawnItem {
     private User user;
 
     public PawnItem(Map<String, String> fromData) {
-        this.pawnItemName = fromData.get("name");
+        this.pawnItemName = fromData.get("pawnItemName");
         this.category = PawnItemCategory.valueOf(fromData.get("category"));
     }
 }

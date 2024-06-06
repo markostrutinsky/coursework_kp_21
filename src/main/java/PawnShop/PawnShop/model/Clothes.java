@@ -17,7 +17,7 @@ import java.util.Map;
 @PrimaryKeyJoinColumn(name = "product_id")
 @NoArgsConstructor
 @Data
-public class Clothes extends PawnItem{
+public class Clothes extends PawnItem {
 
     //@NotBlank
     @Column(name = "size")

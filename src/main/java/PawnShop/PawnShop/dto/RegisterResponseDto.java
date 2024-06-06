@@ -6,7 +6,6 @@ import lombok.Data;
 @Data
 @Builder
 public class RegisterResponseDto {
-
     private Long id;
     private String username;
     private String password;

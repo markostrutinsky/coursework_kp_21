@@ -1,0 +1,18 @@
+.dropdown {
+    position: absolute;
+    right: 20px;
+    top: 4rem;
+    display: flex;
+    flex-direction: column;
+    background-color: #334139;
+    padding: 10px 20px;
+    border-radius: 6px;
+    a {
+        color: #B0C592;
+        text-decoration: none;
+        margin: 5px;
+        &:hover {
+            color: #a0a0a0;
+        }
+    }
+}
