@@ -1,6 +1,5 @@
 package PawnShop.PawnShop.response;
 
-import PawnShop.PawnShop.model.Agreement;
 import lombok.Builder;
 import lombok.Data;
 

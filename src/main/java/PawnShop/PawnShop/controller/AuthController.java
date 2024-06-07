@@ -2,7 +2,6 @@ package PawnShop.PawnShop.controller;
 
 import PawnShop.PawnShop.dto.AuthResponse;
 import PawnShop.PawnShop.dto.RegisterRequestDto;
-import PawnShop.PawnShop.dto.RegisterResponseDto;
 import PawnShop.PawnShop.model.security.Authority;
 import PawnShop.PawnShop.model.security.User;
 import PawnShop.PawnShop.dto.LoginRequest;
@@ -11,8 +10,6 @@ import PawnShop.PawnShop.service.UserService;
 import PawnShop.PawnShop.validation.Registrar;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

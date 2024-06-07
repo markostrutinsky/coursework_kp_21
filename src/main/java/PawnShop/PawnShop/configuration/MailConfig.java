@@ -3,7 +3,6 @@ package PawnShop.PawnShop.configuration;
 import PawnShop.PawnShop.service.observer.NotificationService;
 import PawnShop.PawnShop.service.observer.impl.GmailNotification;
 import jakarta.annotation.PostConstruct;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
