@@ -6,6 +6,7 @@ export const DEFAULT_HEADERS: { [key: string]: string } = {
     "Access-Control-Allow-Origin": "*",
     "Authorization": (()=>{
         const token = JSON.parse(localStorage.getItem("authUser") ?? "{}").jwtToken
+        console.log(localStorage.getItem("authUser"));
         return token ? `Bearer ${token}` : ""
     })(),
 }
@@ -13,6 +14,11 @@ export const DOMAIN = "http://localhost:8080";
 
 class CustomFetchService {
     constructor() {
+    }
+
+    getAuthorization(){
+        const token = JSON.parse(localStorage.getItem("authUser") ?? "{}").jwtToken
+        return token ? `Bearer ${token}` : ""
     }
 
     async get<T>(url: string, headers: { [key: string]: string } = {}): Promise<T> {
@@ -52,9 +58,8 @@ class CustomFetchService {
         let headers = {
             ...DEFAULT_HEADERS,
             ...customHeaders,
+            "Authorization":this.getAuthorization()
         };
-
-        headers = await addAuthHeader(headers);
 
         const options = {
             headers,
