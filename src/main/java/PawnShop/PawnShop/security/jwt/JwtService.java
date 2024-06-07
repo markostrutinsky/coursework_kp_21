@@ -18,8 +18,6 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class JwtService {
 
-//    private final JwtDeserializer jwtDeserializer;
-
     public static final String SECRET = "357638792F423F4428472B4B6250655368566D597133743677397A2443264629";
     public static final String SCOPE_CLAIM = "scope";
 

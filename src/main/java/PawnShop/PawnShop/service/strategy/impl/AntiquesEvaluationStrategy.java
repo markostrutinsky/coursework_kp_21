@@ -35,20 +35,20 @@ public class AntiquesEvaluationStrategy implements EvaluationStrategy {
         evaluation = evaluation.add(new BigDecimal(conditionFactor));
 
         double materialFactor = switch (item.getMaterial()) {
-            case "gold" -> 5.0 + (Math.random() * 1.0);
+            case "gold" -> 5.0 + (Math.random());
             case "silver" -> 3.0 + (Math.random() * 0.5);
             case "porcelain" -> 2.5 + (Math.random() * 0.3);
             case "brass" -> 2.0 + (Math.random() * 0.2);
             case "copper" -> 1.8 + (Math.random() * 0.1);
             case "wood" -> 1.5 + (Math.random() * 0.1);
-            case "ivory" -> 4.0 + (Math.random() * 1.0);
+            case "ivory" -> 4.0 + (Math.random());
             case "jade" -> 6.0 + (Math.random() * 1.5);
             default -> 1.2 + (Math.random() * 0.2);
         };
         evaluation = evaluation.add(new BigDecimal(materialFactor));
 
         double makerFactor = switch (item.getMaker()) {
-            case "renowned artist" -> 5.0 + (Math.random() * 1.0);
+            case "renowned artist" -> 5.0 + (Math.random());
             case "well-known maker" -> 3.5 + (Math.random() * 0.5);
             case "established craftsman" -> 3.0 + (Math.random() * 0.3);
             case "local artisan" -> 2.5 + (Math.random() * 0.2);
@@ -59,7 +59,7 @@ public class AntiquesEvaluationStrategy implements EvaluationStrategy {
 
         double provenanceFactor = switch (item.getProvenance()) {
             case "royal family" -> 6.0 + (Math.random() * 1.5);
-            case "historical figure" -> 5.0 + (Math.random() * 1.0);
+            case "historical figure" -> 5.0 + (Math.random());
             case "museum collection" -> 4.0 + (Math.random() * 0.5);
             case "ancient civilization" -> 3.5 + (Math.random() * 0.3);
             case "private collection" -> 3.0 + (Math.random() * 0.2);

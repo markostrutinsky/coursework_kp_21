@@ -42,7 +42,7 @@ const ItemPage: React.FC = () => {
             <div className={"movieCard"}>
                 <div>Properties: </div>
                 {Object.entries(pawnItem).map(entry =>{
-                    if(entry[0] == "agreement" || entry[0] == "user")
+                    if(entry[0] == "agreement" || entry[0] == "user" || entry[0] == "photo" || entry[0] == "preciousStones" || entry[0] == "soldTo")
                     {
                         return null;
                     }
@@ -51,6 +51,20 @@ const ItemPage: React.FC = () => {
                         return <div>{entry[0]} : {entry[1]}</div>
                     }
                 })}
+                <div style={{marginTop:"10px"}}>Agreement: 
+                    {
+                        Object.entries((pawnItem as any).agreement).map(entry =>{
+                            if(entry[0] == "paid")
+                            {
+                                return null;
+                            }
+                            else
+                            {
+                                return <div style={{marginLeft:"30px"}}> {entry[0]} : {entry[1] as string}</div>
+                            }
+                        })
+                    }
+                </div>
             </div>
         </div>
     </div>;

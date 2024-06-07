@@ -28,8 +28,6 @@ public class UserServiceImpl implements UserService, Registrar {
         if(user.getPassword() == null) {
             throw new NullPointerException("Password cannot be null");
         }
-        //TODO: Do we need to encode passwords?
-        //user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 

@@ -4,7 +4,6 @@ import PawnShop.PawnShop.model.PawnItemCategory;
 import PawnShop.PawnShop.response.AgreementResponse;
 import PawnShop.PawnShop.response.PawnItemDeleteResponse;
 import PawnShop.PawnShop.response.PawnItemResponse;
-import PawnShop.PawnShop.service.PawnItemService;
 import PawnShop.PawnShop.service.mediator.Mediator;
 import PawnShop.PawnShop.service.mediator.requests.*;
 import lombok.RequiredArgsConstructor;
