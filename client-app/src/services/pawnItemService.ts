@@ -11,7 +11,7 @@ class PawnshopService {
     }
 
     public async getAllByCategory(category: PawnItemCategory): Promise<PawnItem[]> {
-        const response = await this.customFetchService.get<PawnItem[]>(`${this.baseURI}/items/by-category/${category}`);
+        const response = await this.customFetchService.get<PawnItem[]>(`${this.baseURI}/items/by-category/${PawnItemCategory[category]}`);
         return response;
     }
 

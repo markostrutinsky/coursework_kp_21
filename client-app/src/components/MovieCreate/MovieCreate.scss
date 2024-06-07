@@ -1,6 +1,6 @@
-$page-bg-color: #1E2D24;
-$input-bg-color: #334139;
-$text-color: #B0C592;
+$page-bg-color: #7C7F65;
+$input-bg-color: #9E9885;
+$text-color: #CFC7D2;
 $button-bg-color: #f39c12;
 $button-hover-bg-color: #e67e22;
 
@@ -42,7 +42,7 @@ $button-hover-bg-color: #e67e22;
     border: none;
     border-radius: 5px;
     background: $button-bg-color;
-    color: $input-bg-color;
+    color: #fff;
     font-size: 1em;
     cursor: pointer;
     transition: background 0.3s ease-in-out;

@@ -36,6 +36,9 @@ public class PawnItem {
 
     @ManyToOne
     private User user;
+    
+    @ManyToOne
+    private User soldTo;
 
     public PawnItem(Map<String, String> fromData) {
         this.pawnItemName = fromData.get("pawnItemName");
