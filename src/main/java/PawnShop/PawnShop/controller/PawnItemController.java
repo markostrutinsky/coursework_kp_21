@@ -1,7 +1,4 @@
 package PawnShop.PawnShop.controller;
-
-import PawnShop.PawnShop.dto.PurchaseRequest;
-import PawnShop.PawnShop.dto.PurchaseResponse;
 import PawnShop.PawnShop.model.PawnItem;
 import PawnShop.PawnShop.model.PawnItemCategory;
 import PawnShop.PawnShop.response.AgreementResponse;
@@ -64,13 +61,5 @@ public class PawnItemController {
     public ResponseEntity<PawnItemDeleteResponse> delete(@PathVariable("itemId") long itemId) {
         PawnItem deletedItem = mediator.send(new DeleteItemRequest(itemId));
         return ResponseEntity.ok(PawnItemDeleteResponse.builder().id(deletedItem.getId()).build());
-    }
-
-    @CrossOrigin
-    @PostMapping("/purchase/{itemId}")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<PurchaseResponse> purchase(@PathVariable("itemId") long itemId) {
-        PurchaseResponse response = mediator.send(new PurchaseRequest(itemId));
-        return ResponseEntity.ok(response);
     }
 }
