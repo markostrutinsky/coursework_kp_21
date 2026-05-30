@@ -19,7 +19,7 @@ public class RoleController {
     private final RoleServiceImpl roleService;
     @GetMapping("/all-roles")
     public ResponseEntity<List<Role>> getAllRoles(){
-        return new ResponseEntity<List<Role>>(roleService.getRoles(), HttpStatus.FOUND);
+        return new ResponseEntity<List<Role>>(roleService.getRoles(), HttpStatus.OK);
     }
 
     @PostMapping("/create-new-role")

@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Blob;
 import java.util.Map;
 
 @Entity
@@ -26,11 +25,10 @@ public class PawnItem {
     @Column(name = "type", nullable = false)
     private PawnItemCategory category;
 
-    @Lob
-    @Column(name = "photo", nullable = false)
-    private Blob photo;
+    @Column(name = "photo", columnDefinition = "TEXT")
+    private String photo;
 
-    @OneToOne(/*cascade = CascadeType.ALL*/)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "agreement_id")
     private Agreement agreement;
 

@@ -13,10 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.sql.rowset.serial.SerialBlob;
-import java.sql.Blob;
 import java.sql.SQLException;
-import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
@@ -39,17 +36,17 @@ public class PawnItemServiceImpl implements PawnItemService {
     }
 
     @Override
-    public PawnItem addNewItem(Map<String, String> formData) throws SQLException {
+    public PawnItem addNewItem(Map<String, String> formData) {
         PawnItem item = createItem(formData);
         item.setCategory(PawnItemCategory.convertStringToPawnItemCategory(formData.get("category")));
-        if (!formData.get("photo").isEmpty()){
-            byte[] photoBytes = Base64.getDecoder().decode(formData.get("photo"));
-            Blob photoBlob = new SerialBlob(photoBytes);
-            item.setPhoto(photoBlob);
+        String photoData = formData.get("photo");
+        if (photoData != null && !photoData.isEmpty()) {
+            item.setPhoto(photoData);
+        } else {
+            item.setPhoto("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==");
         }
         Agreement agreement = createAgreement(formData);
         item.setAgreement(agreement);
-
         return itemRepository.save(item);
     }
 

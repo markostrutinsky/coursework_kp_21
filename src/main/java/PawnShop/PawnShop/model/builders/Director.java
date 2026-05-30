@@ -11,11 +11,14 @@ import java.util.Map;
 
 public class Director {
     public Agreement createAgreement(Builder builder, Map<String, String> formData) {
-        return builder.personWithName(formData.get("firstName"))
-                .personWithName(formData.get("lastName"))
-                .withEmail(formData.get("email"))
-                .takesLoanForAmount(new BigDecimal(formData.get("loanAmount")))
-                .atAnInterestRate(Integer.parseInt(formData.get("interestRate")))
+        String loanAmount  = formData.getOrDefault("loanAmount",  "0");
+        String interestRate = formData.getOrDefault("interestRate", "1");
+        return builder
+                .personWithName(formData.getOrDefault("firstName", ""))
+                .bySurname(formData.getOrDefault("lastName", ""))
+                .withEmail(formData.getOrDefault("email", ""))
+                .takesLoanForAmount(new BigDecimal(loanAmount.isEmpty() ? "0" : loanAmount))
+                .atAnInterestRate(Integer.parseInt(interestRate.isEmpty() ? "1" : interestRate))
                 .startsWith(new Date())
                 .expires(Date.from(Instant.now().plus(Duration.ofDays(30))))
                 .isPaid(false)

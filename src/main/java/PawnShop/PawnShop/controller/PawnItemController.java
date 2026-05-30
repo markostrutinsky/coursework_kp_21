@@ -36,7 +36,7 @@ public class PawnItemController {
     }
 
     @PostMapping("/add-item")
-    public ResponseEntity<PawnItemResponse> addItem(@RequestBody Map<String, String> formData) throws SQLException, IOException {
+    public ResponseEntity<PawnItemResponse> addItem(@RequestBody Map<String, String> formData) throws Exception {
         PawnItem pawnItem = pawnItemService.addNewItem(formData);
 
         PawnItemResponse pawnItemResponse = new PawnItemResponse(pawnItem);
